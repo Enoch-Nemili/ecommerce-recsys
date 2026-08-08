@@ -1,0 +1,34 @@
+# Phase 0-1: data pipeline
+pyspark==3.5.1
+pandas
+pyarrow
+
+# Phase 2: ranking model + feature store
+lightgbm
+scikit-learn
+redis
+
+# Phase 3: ONNX export (Python -> Java model bridge)
+onnxmltools
+skl2onnx
+onnxruntime
+
+# Phase 4: embeddings + ANN retrieval
+torch
+faiss-cpu          # swap to faiss-gpu on the GPU node if desired
+
+# Phase 5: streaming
+kafka-python
+
+# Phase 6: search
+# Pin to match the Elasticsearch server version in docker-compose.yml (8.13.4) —
+# the client enforces a compatibility check against the server's major version.
+elasticsearch==8.13.0
+
+# Phase 7: eval / load testing
+locust
+matplotlib
+
+# Utilities
+tqdm
+python-dotenv

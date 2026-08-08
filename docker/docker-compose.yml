@@ -1,0 +1,87 @@
+version: "3.8"
+
+# Infra for later phases. Spark runs locally (pip install pyspark) so it's
+# not containerized here — only stateful services that need to persist
+# or be reachable over the network go in Compose.
+#
+# Bring services up incrementally as you reach each phase:
+#   docker compose up -d redis            # Phase 2 (feature store)
+#   docker compose up -d kafka zookeeper   # Phase 5 (streaming)
+#   docker compose up -d elasticsearch     # Phase 6 (search)
+#   docker compose up -d prometheus grafana  # Phase 7 (observability)
+#
+# Prometheus scrapes metrics from the Java service running on the HOST
+# machine (not in Docker), which is why prometheus.yml targets
+# host.docker.internal:8080 rather than a container name — Docker's
+# internal network can't reach a process running directly on your Mac by
+# "localhost" from inside a container.
+
+services:
+  redis:
+    image: redis:7-alpine
+    container_name: recsys-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+
+  zookeeper:
+    image: confluentinc/cp-zookeeper:7.6.0
+    container_name: recsys-zookeeper
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+    ports:
+      - "2181:2181"
+
+  kafka:
+    image: confluentinc/cp-kafka:7.6.0
+    container_name: recsys-kafka
+    depends_on:
+      - zookeeper
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+    ports:
+      - "9092:9092"
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.13.4
+    container_name: recsys-elasticsearch
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - "ES_JAVA_OPTS=-Xms1g -Xmx1g"
+    ports:
+      - "9200:9200"
+    volumes:
+      - es-data:/usr/share/elasticsearch/data
+
+  prometheus:
+    image: prom/prometheus:v2.53.0
+    container_name: recsys-prometheus
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    ports:
+      - "9090:9090"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  grafana:
+    image: grafana/grafana:11.1.0
+    container_name: recsys-grafana
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_AUTH_ANONYMOUS_ENABLED=true
+      - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
+    volumes:
+      - ./grafana/provisioning:/etc/grafana/provisioning:ro
+    depends_on:
+      - prometheus
+
+volumes:
+  redis-data:
+  es-data:

@@ -1,0 +1,35 @@
+# Data (never commit — dataset is ~3.4GB, plus derived Parquet)
+data/raw/*
+data/processed/*
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+
+# Python
+venv/
+__pycache__/
+*.pyc
+.env
+
+# Spark
+spark-warehouse/
+metastore_db/
+derby.log
+
+# Java / Maven (src/serving/recsys-service)
+target/
+*.class
+
+# IDE
+.idea/
+*.iml
+.vscode/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS
+.DS_Store
+
+# Personal notes and debug session logs — not part of the deliverable
+tiktok/
+phase*_log.txt

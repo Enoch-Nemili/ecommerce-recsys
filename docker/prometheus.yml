@@ -1,0 +1,12 @@
+global:
+  scrape_interval: 5s
+
+scrape_configs:
+  - job_name: "recsys-service"
+    metrics_path: "/actuator/prometheus"
+    static_configs:
+      # The Java service runs directly on the host machine (not in
+      # Docker), so Prometheus — which IS in a container — reaches it via
+      # host.docker.internal rather than localhost. From inside a
+      # container, "localhost" means the container itself, not the host.
+      - targets: ["host.docker.internal:8080"]
