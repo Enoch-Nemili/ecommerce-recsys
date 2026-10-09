@@ -26,7 +26,7 @@ http://localhost:8089 to watch it live and control ramp-up interactively.
 
 import random
 
-from locust import HttpUser, task, between
+from locust import HttpUser, between, task
 
 # A spread of real user_ids and category_ids from the actual dataset —
 # using a range rather than one fixed ID exercises Redis/ES with varied

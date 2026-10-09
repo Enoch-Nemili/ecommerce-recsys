@@ -24,7 +24,6 @@ import time
 
 import redis
 from kafka import KafkaConsumer
-
 from streaming_utils import apply_event_to_redis
 
 

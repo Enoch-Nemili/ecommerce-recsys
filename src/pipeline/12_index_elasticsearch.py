@@ -34,7 +34,6 @@ import argparse
 import pandas as pd
 from elasticsearch import Elasticsearch, helpers
 
-
 INDEX_MAPPING = {
     "mappings": {
         "properties": {

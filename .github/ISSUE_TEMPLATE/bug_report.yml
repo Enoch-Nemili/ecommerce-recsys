@@ -1,0 +1,33 @@
+name: Bug report
+description: Something isn't working as documented
+labels: [bug]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened?
+      description: Include the exact error message.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: "1. Run ...\n2. With input ...\n3. See error"
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect?
+  - type: input
+    id: version
+    attributes:
+      label: Version or commit
+      placeholder: v1.0.0 or a commit SHA
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs
+      description: Remove any secrets or API keys first.
+      render: text
