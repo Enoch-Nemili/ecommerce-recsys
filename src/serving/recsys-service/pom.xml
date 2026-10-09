@@ -47,7 +47,7 @@
         <dependency>
             <groupId>redis.clients</groupId>
             <artifactId>jedis</artifactId>
-            <version>5.1.3</version>
+            <version>8.0.1</version>
         </dependency>
 
         <!-- ONNX Runtime — loads and scores the exported LightGBM model.
