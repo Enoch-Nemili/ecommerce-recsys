@@ -17,7 +17,8 @@ Run on the full dataset (no --sample-frac) once the logic is validated.
 import argparse
 import json
 
-from pyspark.sql import SparkSession, functions as F
+from pyspark.sql import SparkSession
+from pyspark.sql import functions as F
 from pyspark.sql.window import Window
 
 SCHEMA_COLS = ["user_id", "item_id", "category_id", "behavior_type", "ts"]

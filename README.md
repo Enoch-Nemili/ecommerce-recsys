@@ -1,5 +1,11 @@
 # E-Commerce Recommendation System
 
+[![CI](https://github.com/Enoch-Nemili/ecommerce-recsys/actions/workflows/ci.yml/badge.svg)](https://github.com/Enoch-Nemili/ecommerce-recsys/actions/workflows/ci.yml)
+[![Release](https://img.shields.io/github/v/release/Enoch-Nemili/ecommerce-recsys)](https://github.com/Enoch-Nemili/ecommerce-recsys/releases)
+![Python](https://img.shields.io/badge/Python-PySpark-blue)
+![Java](https://img.shields.io/badge/Java-17%20Spring%20Boot-orange)
+![License](https://img.shields.io/badge/License-MIT-yellow)
+
 An end-to-end recommendation system built on real e-commerce clickstream data — covering the full path from raw event data to a live, load-tested serving API: offline data pipelines, candidate generation, a trained ranking model, real-time streaming feature updates, product search, and observability.
 
 Built as a systems/infrastructure-focused project: the emphasis throughout is on **data pipelines, storage, and serving performance**, not on state-of-the-art modeling.
@@ -156,7 +162,7 @@ python src/pipeline/03_train_ranker.py --input data/processed/train_examples --m
 
 ```bash
 cd src/serving/recsys-service
-# set ranker.model.path in src/main/resources/application.properties to your exported ONNX model
+# defaults to data/processed/ranker_model.onnx; override with RANKER_MODEL_PATH=/path/to/ranker_model.onnx
 mvn spring-boot:run
 ```
 
@@ -178,3 +184,19 @@ With Prometheus + Grafana running (`docker compose up -d prometheus grafana`), a
 - Blended ranking (model score + a secondary signal) to handle model score saturation
 - Search infrastructure with honest separation of real vs. demonstrative data
 - Load testing and Prometheus/Grafana observability with real, measured performance numbers
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md), [CHANGELOG.md](CHANGELOG.md) and [SECURITY.md](SECURITY.md).
+
+## Contact
+
+**Nemili Enoch Das**, MS Computer Science @ George Washington University. Open to full-time and early-career software engineering roles in AI infrastructure, backend and ML systems.
+
+- Email: [enoch.das@gmail.com](mailto:enoch.das@gmail.com)
+- GitHub: [@Enoch-Nemili](https://github.com/Enoch-Nemili)
+- LinkedIn: [enoch-nemili](https://www.linkedin.com/in/enoch-nemili/)
+
+## License
+
+MIT. See [LICENSE](LICENSE).
