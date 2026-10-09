@@ -1,3 +1,5 @@
+![E-Commerce RecSys](docs/social-preview.png)
+
 # E-Commerce Recommendation System
 
 [![CI](https://github.com/Enoch-Nemili/ecommerce-recsys/actions/workflows/ci.yml/badge.svg)](https://github.com/Enoch-Nemili/ecommerce-recsys/actions/workflows/ci.yml)
