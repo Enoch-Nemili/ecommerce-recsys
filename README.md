@@ -14,7 +14,7 @@ Built as a systems/infrastructure-focused project: the emphasis throughout is on
 
 ## Scope note
 
-Everything below was built, run, and validated on a **5% sample of users** from the full dataset (~49,000 of ~1,000,000 users, ~972,000 of ~4.16,000,000 items) — not the full 100M-row dataset. All metrics in this README are real results from that sample, run end-to-end on real infrastructure (not synthetic data), but scaling to the full dataset would require re-running the same pipeline with more compute/time, not new code.
+Everything below was built, run, and validated on a **5% sample of users** from the full dataset (~49,000 of ~1,000,000 users, ~972,000 of ~4,160,000 items) — not the full 100M-row dataset. All metrics in this README are real results from that sample, run end-to-end on real infrastructure (not synthetic data), but scaling to the full dataset would require re-running the same pipeline with more compute/time, not new code.
 
 ## Architecture
 
